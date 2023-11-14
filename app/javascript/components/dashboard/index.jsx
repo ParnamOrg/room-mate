@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { checkAuthenticationStatus } from '../../utility/authenticationStatus'
 
 const index = () => {
+	useEffect(() => {
+		console.log("CHECKING")
+    const fetchData = async () => {
+      try {
+        const response = await checkAuthenticationStatus('token');
+        console.log('Authentication status:', response.authentication_status);
+      } catch (error) {
+        console.error('Error fetching authentication status:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return(
 	  <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
 	    <div className="jumbotron jumbotron-fluid bg-transparent">

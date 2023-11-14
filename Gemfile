@@ -27,3 +27,4 @@ end
 
 gem 'devise'
 gem 'jwt'
+gem 'pry'
