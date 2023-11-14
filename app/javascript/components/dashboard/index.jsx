@@ -4,7 +4,6 @@ import { checkAuthenticationStatus } from '../../utility/authenticationStatus'
 
 const index = () => {
 	useEffect(() => {
-		console.log("CHECKING")
     const fetchData = async () => {
       try {
         const response = await checkAuthenticationStatus('token');
