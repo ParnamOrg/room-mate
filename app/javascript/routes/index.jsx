@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "../components/dashboard/index";
+
+import LoginForm from "../components/authentication/loginForm";
 
 export default (
   <Router>
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<LoginForm />} />
     </Routes>
   </Router>
 );
