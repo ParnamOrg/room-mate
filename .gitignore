@@ -7,6 +7,10 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-*
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
@@ -17,6 +21,21 @@
 /tmp/pids/*
 !/tmp/pids/
 !/tmp/pids/.keep
+
+/config/database.yml
+
+/coverage/
+
+/public/integration
+/public/uploads
+/public/system
+/public/tmp
+/public/assets
+
+/dump.rdb
+.idea/
+puma.pid
+puma.state
 
 # Ignore uploaded files in development.
 /storage/*
