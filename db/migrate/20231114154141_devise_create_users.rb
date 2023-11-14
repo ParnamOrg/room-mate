@@ -38,6 +38,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.integer :phone_number
       t.integer :availability
       t.text :address
+      t.string :token
       t.references :branch
 
       t.timestamps null: false

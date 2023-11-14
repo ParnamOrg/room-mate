@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       post "users/sign_in", to: "sessions#create"
       delete "users/sign_out", to: "sessions#destroy"
 
+      get '/authentication_status', to: 'authentication#status'
+
       # password reset
       post "users/password/new", to: "passwords#new"
     end

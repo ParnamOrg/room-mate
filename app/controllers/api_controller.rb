@@ -3,11 +3,11 @@ class ApiController < ApplicationController
   include ErrorHandling::ExceptionHandling
   include ApiHelper
 
-  rescue_from Apipie::ParamError do |e|
-    render json: {
-            messages: e.message,
-          }, status: :unprocessable_entity
-  end
+  # rescue_from Apipie::ParamError do |e|
+  #   render json: {
+  #           messages: e.message,
+  #         }, status: :unprocessable_entity
+  # end
 
   rescue_from JSON::ParserError do |e|
     render json: {
@@ -15,12 +15,12 @@ class ApiController < ApplicationController
           }, status: :unprocessable_entity
   end
 
-  skip_before_action :verify_authenticity_token
-  skip_before_action :authenticate_user!
-  around_action :handle_exceptions
+  # skip_before_action :verify_authenticity_token
+  # skip_before_action :authenticate_user!
   # skip_before_action :check_for_authentication
+  # around_action :handle_exceptions
   before_action :set_default_response_format
-  before_action :verify_token
+  # before_action :verify_token
   helper_method :current_user
 
   def verify_token
