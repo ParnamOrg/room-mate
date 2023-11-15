@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { checkAuthenticationStatus } from '../../utility/authenticationStatus'
 import axios from 'axios';
@@ -10,18 +10,6 @@ const loginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-
-	useEffect(() => {
-        const fetchData = async () => {
-        try {
-            const response = await checkAuthenticationStatus('token');
-            console.log('Authentication status:', response.authentication_status);
-        } catch (error) {
-            console.error('Error fetching authentication status:', error);
-        }
-        };
-        fetchData();
-    }, []);
 
     const handleLogin = async () => {
         try {
