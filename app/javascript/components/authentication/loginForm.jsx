@@ -47,7 +47,7 @@ const loginForm = () => {
             </div>
 	        <Link
 	          to="/recipes"
-	          className="btn btn-lg d-block mt-4 fw-bold small-font input-text d-flex align-items-center justify-content-center button-style"
+	          className="btn d-block mt-4 fw-bold small-font input-text d-flex align-items-center justify-content-center button-style"
 	          role="button"
 	        >
 	          Sign In
