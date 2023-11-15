@@ -4,13 +4,14 @@ import { checkAuthenticationStatus } from '../../utility/authenticationStatus'
 import axios from 'axios';
 import { currentDomainUrl } from '../../config/variables';
 import { csrfToken } from '../../config/variables';
+import { useNavigate } from 'react-router-dom';
 
 const loginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
 	useEffect(() => {
-        console.log("SSDADS", csrfToken)
         const fetchData = async () => {
         try {
             const response = await checkAuthenticationStatus('token');
@@ -38,10 +39,11 @@ const loginForm = () => {
             }
             );
 
-            console.log('Login successful:', response.data);
+            if (response.data.logged_in){
+                navigate('/api/v1/users/password/new');
+            }
         } catch (error) {
           console.error('Login failed:', error.response?.data || error.message);
-          // Handle login failure, e.g., display an error message
         }
       };
 
