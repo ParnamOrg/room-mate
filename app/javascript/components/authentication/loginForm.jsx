@@ -39,7 +39,7 @@ const loginForm = () => {
 
   return(
 	  <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
-	    <div className="jumbotron jumbotron-fluid bg-transparent" style={{marginTop: -250}}>
+	    <div className="jumbotron jumbotron-fluid bg-transparent" style={{marginTop: -100}}>
 	      <div className="container secondary-color">
             <form>
     	        <h1 className="display-4 fw-bold">Sign In</h1>
@@ -62,7 +62,7 @@ const loginForm = () => {
                         </label>
                     </div>
                     <Link
-                        to="/password/new"
+                        to="/forgot_password"
                         className="small-font fw-bold recover-password mt-4"
                     >
                         Recover Password
