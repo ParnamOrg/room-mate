@@ -10,3 +10,9 @@ export const checkAuthenticationStatus = async (token) => {
     throw error;
   }
 };
+
+export const extractToken = (bearerTokenString = '') => {
+  const match = bearerTokenString.match(/Bearer\s+(\S+)/);
+
+  return match ? match[1] : null;
+};

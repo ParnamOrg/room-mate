@@ -15,4 +15,8 @@ class User < ApplicationRecord
     token = JWT.encode({ exp: exp.to_i, password: self.password }, SECRET_KEY, ENCODING)
     self.token = token
   end
+
+  def destroy_auth_token
+    self.token = nil
+  end
 end
