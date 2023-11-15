@@ -14,4 +14,6 @@ Rails.application.routes.draw do
       post "users/password/new", to: "passwords#new"
     end
   end
+
+  get '/forgot_password', to: 'passwords#new'
 end
