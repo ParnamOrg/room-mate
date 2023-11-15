@@ -24,24 +24,24 @@ class ApiController < ApplicationController
   helper_method :current_user
 
   def verify_token
-    # if request.headers[:authorization].present?
-    #   @current_user = User.find_by(token: request.headers[:authorization])
-    #   if @current_user.present?
-    #     if @current_user.has_role?(:admin)
-    #       handle_error("Admin user not allowed", :unauthorized)
-    #     else
-    #       if @current_user.confirmed?
-    #         @current_user
-    #       else
-    #         handle_error("Please confirm your account first", :unauthorized)
-    #       end
-    #     end
-    #   else
-    #     handle_error("Invalid auth token", :unauthorized)
-    #   end
-    # else
-    #   handle_error("Invalid auth token", :unauthorized)
-    # end
+    if request.headers[:authorization].present?
+      @current_user = User.find_by(token: request.headers[:authorization])
+      if @current_user.present?
+        if @current_user.has_role?(:admin)
+          handle_error("Admin user not allowed", :unauthorized)
+        else
+          if @current_user.confirmed?
+            @current_user
+          else
+            handle_error("Please confirm your account first", :unauthorized)
+          end
+        end
+      else
+        handle_error("Invalid auth token", :unauthorized)
+      end
+    else
+      handle_error("Invalid auth token", :unauthorized)
+    end
   end
 
   def is_authenticated?

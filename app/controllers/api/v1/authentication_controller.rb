@@ -4,7 +4,7 @@ class Api::V1::AuthenticationController < ApiController
   def status
     render json: {
       messages: "Authentication verified",
-      authentication_status: current_user.present?
+      isLoggedIn: current_user.present?
     }, status: :ok
   end
 end
