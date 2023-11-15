@@ -13,7 +13,8 @@ class Api::V1::SessionsController < ApiController
         render json: {
           messages: "You\'re signed in.",
           is_success: true,
-          data: {user: @user}
+          logged_in: true,
+          user: @user
         }, status: :ok
       else
         handle_error('Signed In Failed - Unauthorized', :unauthorized)
@@ -51,9 +52,8 @@ class Api::V1::SessionsController < ApiController
 
   def load_user
     @user = User.find_for_database_authentication(email: sign_in_params[:email])
-    if @user
-      @user
-    else
+
+    unless @user
       handle_error('Your user cannot be found.', :bad_request)
     end
   end
