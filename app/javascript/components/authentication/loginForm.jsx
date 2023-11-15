@@ -1,27 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { checkAuthenticationStatus } from '../../utility/authenticationStatus'
 import axios from 'axios';
 import { currentDomainUrl } from '../../config/variables';
 import { csrfToken } from '../../config/variables';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const loginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
-
-	useEffect(() => {
-        const fetchData = async () => {
-        try {
-            const response = await checkAuthenticationStatus('token');
-            console.log('Authentication status:', response.authentication_status);
-        } catch (error) {
-            console.error('Error fetching authentication status:', error);
-        }
-        };
-        fetchData();
-    }, []);
+    // const navigate = useNavigate();
 
     const handleLogin = async () => {
         try {
@@ -40,7 +29,8 @@ const loginForm = () => {
             );
 
             if (response.data.logged_in){
-                navigate('/api/v1/users/password/new');
+                Cookies.set('authorization_token', `Bearer ${response.data.user.token}`);
+                window.location.href = '/'
             }
         } catch (error) {
           console.error('Login failed:', error.response?.data || error.message);
