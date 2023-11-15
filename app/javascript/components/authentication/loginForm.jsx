@@ -26,14 +26,28 @@ const loginForm = () => {
             <p className="lead small-font fw-bold" style={{fontWeight: 400}}>
 	          Email Address
 	        </p>
-            <input className="input-text" />
+            <input className="input-text fw-bold small-font" placeholder="Email Address" />
             <p className="lead small-font fw-bold mt-3" style={{fontWeight: 400}}>
 	          Password
 	        </p>
-            <input className="input-text" />
+            <input className="input-text fw-bold small-font" placeholder="Password" />
+            <div className="d-flex justify-content-between">
+                <div className="mt-4 d-flex">
+                    <input className="form-checkbox" type="checkbox" />
+                    <label className="small-font fw-bold">
+                        Remember me
+                    </label>
+                </div>
+                <Link
+                    to="/password/new"
+                    className="small-font fw-bold recover-password mt-4"
+                >
+                    Recover Password
+                </Link>
+            </div>
 	        <Link
 	          to="/recipes"
-	          className="btn btn-lg d-block mt-5 fw-bold small-font input-text d-flex align-items-center justify-content-center button-style"
+	          className="btn btn-lg d-block mt-4 fw-bold small-font input-text d-flex align-items-center justify-content-center button-style"
 	          role="button"
 	        >
 	          Sign In
