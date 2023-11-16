@@ -12,6 +12,10 @@ const loginForm = () => {
     const [password, setPassword] = useState('');
     // const navigate = useNavigate();
 
+    const showAlert = (message) => {
+      alert(message);
+    };
+
     const handleLogin = async () => {
         try {
             const response = await axios.post(`${currentDomainUrl}/api/v1/users/sign_in`, {
@@ -34,6 +38,7 @@ const loginForm = () => {
             }
         } catch (error) {
           console.error('Login failed:', error.response?.data || error.message);
+          showAlert(error.response?.data.messages);
         }
       };
 
