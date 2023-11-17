@@ -1,0 +1,41 @@
+.alert-div {
+    position: absolute;
+    top: 10px;
+    right: 10px !important;
+    height: 60px;
+    font-weight: 500;
+    color: white;
+    transition: all 1s ease;
+    border-radius: 10px;
+}
+
+/*.alert-div::before {
+    content: '';
+    position: absolute;
+    top: 55px;
+    height: 5px;
+    background-color: white;
+    z-index: 100;
+    opacity: 80%;
+}*/
+
+.alert-button {
+    padding-top: -10px;
+    padding-left: 85px;
+    background: transparent;
+    color: white;
+    border: none;
+    outline: none;
+}
+
+.fade-component {
+    opacity: 0;
+    visibility: visible;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.show-component {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s ease, visibility 1s ease;
+}
