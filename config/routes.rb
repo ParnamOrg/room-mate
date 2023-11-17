@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   end
 
   get '/forgot_password', to: 'passwords#new'
+  get '/user/password/edit', to: 'passwords#edit'
 end

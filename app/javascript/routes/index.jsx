@@ -8,6 +8,7 @@ export default (
     <Routes>
       <Route path="/" element={<Dashboard />} />
       <Route path="/forgot_password" element={<ForgotPasswordForm />} />
+      {/*<Route path="/users/password/edit" element={<ResetPasswordForm />} />*/}
     </Routes>
   </Router>
 );

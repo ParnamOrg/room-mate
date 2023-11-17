@@ -40,7 +40,7 @@ const loginForm = () => {
           console.error('Login failed:', error.response?.data || error.message);
           showAlert(error.response?.data.messages);
         }
-      };
+    };
 
   return(
 	  <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
