@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { checkAuthenticationStatus } from '../../utility/authenticationStatus'
 import axios from 'axios';
-import { currentDomainUrl } from '../../config/variables';
-import { csrfToken } from '../../config/variables';
-// import { useNavigate } from 'react-router-dom';
+import { currentDomainUrl, csrfToken} from '../../config/variables';
 import Cookies from 'js-cookie';
+import ErrorAlert from "./errorAlert";
 
 const loginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const navigate = useNavigate();
-
-    const showAlert = (message) => {
-      alert(message);
-    };
+    const [alertOpacity, setAlertOpacity] = useState('');
+    const [alertMessage, setAlertMessage] = useState('');
+    const [isErrorMessage, setIsErrorMessage] = useState(0);
 
     const handleLogin = async () => {
         try {
@@ -35,15 +31,30 @@ const loginForm = () => {
             if (response.data.logged_in){
                 Cookies.set('authorization_token', `Bearer ${response.data.user.token}`);
                 window.location.href = '/'
+                setAlertOpacity(1);
+                setAlertMessage(error.response?.data.messages);
+                setIsErrorMessage(0);
             }
         } catch (error) {
           console.error('Login failed:', error.response?.data || error.message);
-          showAlert(error.response?.data.messages);
+          setAlertOpacity(1);
+          if(error.response?.data.messages == 'Signed In Failed - Unauthorized') {
+            setAlertWidth(400);
+          }
+          setAlertMessage(error.response?.data.messages);
+          setEmail('');
+          setPassword('');
+          setIsErrorMessageMessage(1);
         }
+
+        setTimeout(() => {
+          setAlertOpacity('');
+        }, 3000);
       };
 
   return(
 	  <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
+      <ErrorAlert message={alertMessage} class={alertOpacity ? 'show-component' : 'fade-component'} onclick={() => {setAlertOpacity('')}} color={isErrorMessage ? '#DF3F32' : '#07bc0c'} />
 	    <div className="jumbotron jumbotron-fluid bg-transparent" style={{marginTop: -100}}>
 	      <div className="container secondary-color">
             <form>
