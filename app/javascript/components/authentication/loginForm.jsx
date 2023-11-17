@@ -4,6 +4,7 @@ import axios from 'axios';
 import { currentDomainUrl, csrfToken} from '../../config/variables';
 import Cookies from 'js-cookie';
 import ErrorAlert from "./errorAlert";
+import { useAlertContext } from '../context/alertContext';
 
 const loginForm = () => {
     const [email, setEmail] = useState('');
@@ -11,6 +12,7 @@ const loginForm = () => {
     const [alertOpacity, setAlertOpacity] = useState('');
     const [alertMessage, setAlertMessage] = useState('');
     const [isErrorMessage, setIsErrorMessage] = useState(0);
+    const { showAlert, hideAlert } = useAlertContext();
 
     const handleLogin = async () => {
         try {
@@ -34,6 +36,7 @@ const loginForm = () => {
                 setAlertOpacity(1);
                 setAlertMessage(error.response?.data.messages);
                 setIsErrorMessage(0);
+                showAlert('Login successful!');
             }
         } catch (error) {
           console.error('Login failed:', error.response?.data || error.message);
@@ -44,7 +47,8 @@ const loginForm = () => {
           setAlertMessage(error.response?.data.messages);
           setEmail('');
           setPassword('');
-          setIsErrorMessageMessage(1);
+          setIsErrorMessage(1);
+          showAlert('Login failed. Please try again.');
         }
 
         setTimeout(() => {
