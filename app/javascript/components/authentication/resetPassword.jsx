@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { csrfToken } from '../../config/variables';
-import { useLocation } from 'react-router-dom';
+import { csrfToken, currentDomainUrl } from '../../config/variables';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const resetPassword = () => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const location = useLocation();
+    const navigate = useNavigate();
 
     const handlePasswordReset = async () => {
         const queryParams = new URLSearchParams(location.search);
         const email = queryParams.get('email')
-        const resetToken = queryParams.get('reset_password_token')
 
         try {
-            const response = await axios.put('/users/password/edit', {
+            const response = await axios.put(`${currentDomainUrl}/api/v1/users/reset_password`, {
                 password: password,
-                resetPasswordToken: resetToken,
                 email: email
             },
             {
@@ -28,7 +27,7 @@ const resetPassword = () => {
             );
 
             if (response.status === 200){
-                // show success msg
+                navigate('/');
             }
 
         } catch (error) {
