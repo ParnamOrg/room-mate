@@ -4,51 +4,54 @@ import axios from 'axios';
 import { currentDomainUrl, csrfToken} from '../../config/variables';
 import Cookies from 'js-cookie';
 import ErrorAlert from "./errorAlert";
+import { useNavigate } from "react-router-dom";
 
 const loginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [alertOpacity, setAlertOpacity] = useState('');
     const [alertMessage, setAlertMessage] = useState('');
-    const [isErrorMessage, setIsErrorMessage] = useState(0);
+    const [isErrorMessage, setIsErrorMessage] = useState(false);
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
-        try {
-            const response = await axios.post(`${currentDomainUrl}/api/v1/users/sign_in`, {
-                user: {
-                    email: email,
-                    password: password,
-                }
-            },
-            {
-                headers: {
-                  'Content-Type': 'application/json',
-                  'X-CSRF-Token': csrfToken,
-                },
-            }
-            );
+      try {
+          const response = await axios.post(`${currentDomainUrl}/api/v1/users/sign_in`, {
+              user: {
+                  email: email,
+                  password: password,
+              }
+          },
+          {
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken,
+              },
+          }
+          );
 
-            if (response.data.logged_in){
-                Cookies.set('authorization_token', `Bearer ${response.data.user.token}`);
-                window.location.href = '/'
+          if (response.data.logged_in){
+              Cookies.set('authorization_token', `Bearer ${response.data.user.token}`);
+              setAlertOpacity(1);
+              setAlertMessage(response.data.messages);
 
-                setAlertOpacity(1);
-                setAlertMessage(response.data.messages);
-                setIsErrorMessage(0);
-            }
-        } catch (error) {
-          setAlertOpacity(1);
+              navigate(0);
+          }
 
-          setAlertMessage(error.response?.data.messages);
-          setEmail('');
-          setPassword('');
-          setIsErrorMessage(1);
-        }
 
-        setTimeout(() => {
-          setAlertOpacity('');
-        }, 3000);
-      };
+      } catch (error) {
+        setAlertOpacity(1);
+
+        setAlertMessage(error.response?.data.messages);
+        setEmail('');
+        setPassword('');
+        setIsErrorMessage(true);
+      }
+
+      setTimeout(() => {
+        setAlertOpacity('');
+      }, 3000);
+    };
 
   return(
     <div className="d-flex align-items-center justify-content-center">
@@ -75,12 +78,11 @@ const loginForm = () => {
                           Remember me
                       </label>
                   </div>
-                  <Link
-                      to="/forgot_password"
-                      className="small-font fw-bold recover-password mt-4"
+                  <button type="button" onClick={() => navigate('users/password/new')}
+                    className="btn small-font fw-bold recover-password mt-3"
                   >
-                      Recover Password
-                  </Link>
+                    Recover Password
+                  </button>
               </div>
               <button type="button" onClick={handleLogin}
                 className="btn btn-lg d-block mt-4 fw-bold small-font input-text d-flex align-items-center justify-content-center button-style"
