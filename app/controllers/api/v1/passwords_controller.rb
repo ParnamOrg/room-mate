@@ -19,10 +19,7 @@ class Api::V1::PasswordsController < ApiController
     user = User.find_by(email: params[:email])
 
     if user.present?
-      user.send_reset_password_instructions
-
-      user.reset_password_by_token({
-        reset_password_token: params[:resetPasswordToken],
+      user.update({
         password: params[:password],
         password_confirmation: params[:password]
       })
