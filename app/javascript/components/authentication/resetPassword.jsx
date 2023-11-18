@@ -33,32 +33,63 @@ const resetPassword = () => {
         } catch (error) {
           console.error('Login failed:', error.response?.data || error.message);
         }
-    };
+      );
 
-    return (
-        <div className="d-flex align-items-center justify-content-center">
-    	    <div className="jumbotron jumbotron-fluid bg-transparent mt-5">
-    	      <div className="container secondary-color">
-                <form>
-        	        <h2 className="fw-bold">Change your password</h2>
-                    <p className="lead small-font fw-bold mt-5" style={{fontWeight: 400}}>
-        	          New Password
-        	        </p>
-                    <input className="input-text fw-bold small-font" placeholder="New Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}  />
-                    <p className="lead small-font fw-bold mt-3" style={{fontWeight: 400}}>
-                      Confirm Password
-                    </p>
-                    <input className="input-text fw-bold small-font" placeholder="Confirm Password" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}  />
-        	        <button type="button" onClick={handlePasswordReset}
-        	          className="btn btn-lg d-block mt-4 fw-bold small-font input-text d-flex align-items-center justify-content-center button-style"
-        	        >
-        	          Reset Password
-        	        </button>
-                </form>
-    	      </div>
-    	    </div>
-	    </div>
-    )
-}
+      if (response.status === 200) {
+        // show success msg
+      }
+    } catch (error) {
+      console.error("Login failed:", error.response?.data || error.message);
+    }
+  };
+
+  return (
+    <div className="d-flex align-items-center justify-content-center">
+      <div className="jumbotron jumbotron-fluid bg-transparent mt-5">
+        <div className="container secondary-color">
+          <form>
+            <h1 className="fw-bold" style={{fontSize:37}}>Change your password</h1>
+            <p className="lead small-font" style={{ fontWeight: 400 }}>
+              Enter a new password and confirm it to reset your password.
+            </p>
+            <p
+              className="lead small-font fw-bold mt-3"
+              style={{ fontWeight: 400 }}
+            >
+              New Password
+            </p>
+            <input
+              className="input-text fw-bold small-font"
+              placeholder="New Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <p
+              className="lead small-font fw-bold mt-3"
+              style={{ fontWeight: 400 }}
+            >
+              Confirm Password
+            </p>
+            <input
+              className="input-text fw-bold small-font"
+              placeholder="Confirm Password"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <button
+              type="button"
+              onClick={handlePasswordReset}
+              className="btn btn-lg d-block mt-4 fw-bold small-font input-text d-flex align-items-center justify-content-center button-style"
+            >
+              Reset Password
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default resetPassword;
