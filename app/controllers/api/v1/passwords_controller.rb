@@ -14,4 +14,26 @@ class Api::V1::PasswordsController < ApiController
         handle_error('Invalid email', :unprocessable_entity)
       end
   end
+
+  def update
+    user = User.find_by(email: params[:email])
+
+    if user.present?
+      user.update({
+        password: params[:password],
+        password_confirmation: params[:password]
+      })
+
+      if user.errors.empty?
+        render json: {
+          messages: "Reset password successfully!",
+          is_success: true,
+        }, status: :ok
+      else
+        handle_error(user.errors.full_messages, :unprocessable_entity)
+      end
+    else
+      handle_error('User not found', :not_found)
+    end
+  end
 end

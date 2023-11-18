@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
       # password reset
       post "users/password/new", to: "passwords#new"
+      put "users/reset_password", to: "passwords#update"
     end
   end
 
