@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { checkAuthenticationStatus } from '../../utility/authenticationStatus'
 import { extractToken } from '../../utility/authenticationStatus'
 import Dashboard from './dashboard'
 import LoginForm from '../authentication/loginForm'

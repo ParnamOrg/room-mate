@@ -22,11 +22,11 @@ const forgotPassword = () => {
                 // show success msg
             }
 
-            setEmail('')
-
         } catch (error) {
           console.error('Login failed:', error.response?.data || error.message);
         }
+
+        setEmail('')
     };
 
     return (

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { passwords: 'passwords' }
+
   root 'dashboard#index'
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       # user authentication
@@ -17,5 +19,4 @@ Rails.application.routes.draw do
   end
 
   get '/forgot_password', to: 'passwords#new'
-  get '/user/password/edit', to: 'passwords#edit'
 end
